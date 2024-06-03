@@ -1,7 +1,7 @@
 from flask import request
 from flask_restplus import Resource, Namespace
 from app import crud
-from app.schema import user, user_create
+from app.schema import user, user_create, profile
 from app.database import database
 
 api = Namespace("users", description="User related operations")
@@ -37,3 +37,32 @@ class User(Resource):
             api.abort(404, "User not found")
 
         return fetched_user
+
+
+@api.route("/<int:user_id>/profile")
+@api.response(404, "User not found")
+class UserProfile(Resource):
+
+    @api.expect(profile)
+    @api.marshal_with(profile, code=201)
+    def post(self, user_id):
+        fetched_user = crud.get_user(user_id)
+
+        if not fetched_user:
+            api.abort(404, "User not found")
+
+        data = request.json
+
+        return crud.create_profile(user_id, data), 201
+
+    @api.expect(profile)
+    @api.marshal_with(profile, code=200)
+    def put(self, user_id):
+        fetched_user = crud.get_user(user_id)
+
+        if not user:
+            api.abort(404, "User not found")
+
+        data = request.json
+
+        return crud.update_profile(user_id, data)
