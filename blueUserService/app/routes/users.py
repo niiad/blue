@@ -1,8 +1,8 @@
 from flask import request
 from flask_restplus import Resource, Namespace
+
 from app import crud
 from app.schema import user, user_create, profile
-from app.database import database
 
 api = Namespace("users", description="User related operations")
 
@@ -60,7 +60,7 @@ class UserProfile(Resource):
     def put(self, user_id):
         fetched_user = crud.get_user(user_id)
 
-        if not user:
+        if not fetched_user:
             api.abort(404, "User not found")
 
         data = request.json
