@@ -2,6 +2,10 @@ from app.models import User, Profile, database
 from app.core.security import get_password_hash
 
 
+def get_all_users():
+    return User.query.all()
+
+
 def get_user_by_email(email: str) -> User:
     return User.query.filter_by(email=email).first()
 
