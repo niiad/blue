@@ -14,6 +14,8 @@ user = api.model("User", {
 })
 
 user_create = api.model("UserCreate", {
+    "first_name": fields.String(required=True, description="The first name of the user"),
+    "last_name": fields.String(required=True, description="The last name of the user"),
     "username": fields.String(required=True, description="The unique username of the user"),
     "email": fields.String(required=True, description="The email address of the user"),
     "password": fields.String(required=True, description="The password of the user")
