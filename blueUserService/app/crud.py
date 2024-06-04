@@ -58,6 +58,10 @@ def create_profile(user_id: int, data: dict) -> Profile | None:
     return profile
 
 
+def get_profile(user_id: int) -> Profile:
+    return Profile.query.filter_by(user_id=user_id).first()
+
+
 def update_profile(user_id: int, data: dict) -> Profile | None:
     profile = Profile.query.filter_by(user_id=user_id).first()
 

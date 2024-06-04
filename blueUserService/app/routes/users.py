@@ -70,6 +70,15 @@ class User(Resource):
 @api.response(404, "User not found")
 class UserProfile(Resource):
 
+    @api.marshal_with(profile)
+    def get(self, user_id):
+        fetched_profile = crud.get_profile(user_id)
+
+        if not fetched_profile:
+            api.abort(404, "Profile not found")
+
+        return fetched_profile
+
     @api.expect(profile)
     @api.marshal_with(profile, code=201)
     def post(self, user_id):
