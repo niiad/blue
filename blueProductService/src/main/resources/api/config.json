@@ -1,0 +1,19 @@
+{
+  "library": "spring-boot",
+  "dateLibrary": "java8",
+  "hideGenerationTimestamp": true,
+  "modelPackage": "com.niiad.blueProductService.model",
+  "apiPackage": "com.niiad.blueProductService",
+  "invokerPackage": "com.niiad.blueProductService",
+  "serializableModel": true,
+  "useTags": true,
+  "useGzipFeature": true,
+  "hateoas": true,
+  "unhandledException": true,
+  "useSpringBoot3": true,
+  "useSwaggerUI": true,
+  "importMappings": {
+    "ResourceSupport": "org.springframework.hateoas.RepresentationModel",
+    "Link": "org.springframework.hateoas.Link"
+  }
+}
