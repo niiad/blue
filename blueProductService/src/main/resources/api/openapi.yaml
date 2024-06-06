@@ -1,0 +1,243 @@
+openapi: 3.0.3
+info:
+  title: Blue Product Microservice
+  description: >
+    The microservice API for the blue e-commerce platform serving product-related resources
+  termsOfService: samuelbrownai@gmail.com
+  contact:
+    name: Nii Adotei
+    url: https://github.com/niiad
+    email: samuelbrownai@gmail.com
+  license:
+    name: MIT
+    url: https://github.com/niiad
+  version: 1.0.0
+
+externalDocs:
+  description: Find more info here
+  url: https://example.com
+
+servers:
+  - url: https://blue.swagger.io/v2
+
+tags:
+  - name: products
+    description: Operations related to products
+
+paths:
+  /api/v1/products:
+    get:
+      tags:
+        - products
+      summary: Returns products
+      description: Returns all the products
+      operationId: queryProducts
+      parameters:
+        - name: tag
+          in: query
+          description: Product tag
+          required: false
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Product name
+          required: true
+          schema:
+            type: string
+        - name: description
+          in: query
+          description: Brief description of product
+          required: true
+          schema:
+            type: string
+        - name: price
+          in: query
+          description: The price of the product
+          required: true
+          schema:
+            type: number
+            format: double
+        - name: imageUrl
+          in: query
+          description: The image profile of the product
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: The type of the product whether a sneaker, slipper, loafer, etc.
+          required: true
+          schema:
+            type: string
+        - name: gender
+          in: query
+          description: The gender target of the product
+          required: true
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: The European size of the product
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: quantity
+          in: query
+          description: The number of products available
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: color
+          in: query
+          description: The color description of the product
+          required: true
+          schema:
+            type: string
+        - name: material
+          in: query
+          description: The dominant material used to manufacture the product
+          required: true
+          schema:
+            type: string
+        - name: brand
+          in: query
+          description: The brand that manufactured the product
+          required: true
+          schema:
+            type: string
+        - name: country
+          in: query
+          description: The country the product was manufactured in
+          required: true
+          schema:
+            type: string
+        - name: rarity
+          in: query
+          description: The rarity of the product
+          required: true
+          schema:
+            type: string
+        - name: impression
+          in: query
+          description: The status class of the product whether classic, luxury, flex, modern, etc.
+          required: true
+          schema:
+            type: string
+        - name: createdAt
+          in: query
+          description: The datetime the product was created
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: lastUpdated
+          in: query
+          description: The last time the product was updated
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: For a successful fetch
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        default:
+          description: Unexpected error
+  /api/v1/products/{id}:
+    get:
+      tags:
+        - products
+      summary: Returns a product
+      description: Returns the product whose ID matches the given product ID
+      operationId: getProduct
+      parameters:
+        - name: id
+          in: path
+          description: Product ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: For a successful fetch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        default:
+          description: Unexpected error
+
+components:
+  schemas:
+    Product:
+      description: Product information
+      type: object
+      properties:
+        id:
+          description: Product ID
+          type: integer
+          format: int64
+        name:
+          description: Product Name
+          type: string
+        description:
+          description: Product Description
+          type: string
+        price:
+          description: The price of the product
+          type: number
+          format: double
+        imageUrl:
+          description: The Product Image URL
+          type: string
+        type:
+          description: The type of the product
+          type: string
+        gender:
+          description: The gender target of the product
+          type: string
+        size:
+          description: The European size of the product
+          type: integer
+          format: int32
+        quantity:
+          description: The number of the products available
+          type: integer
+          format: int32
+          default: 0
+        color:
+          description: The color description of the product
+          type: string
+        material:
+          description: The dominant material the product is made of
+          type: string
+        brand:
+          description: The brand that manufactured the product
+          type: string
+        country:
+          description: The country the product was manufactured in
+          type: string
+        rarity:
+          description: The rarity of the product
+          type: string
+        impression:
+          description: The status class of the product
+          type: string
+        createdAt:
+          description: The datetime the product was created
+          type: string
+          format: date-time
+        lastUpdated:
+          description: The datetime the product was last updated
+          type: string
+          format: date-time
