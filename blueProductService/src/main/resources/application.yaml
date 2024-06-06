@@ -1,3 +1,29 @@
 spring:
   application:
     name: blueProductService
+  datasource:
+    name: blue
+    url: jdbc:h2:mem:blue;DB_CLOSE_DELAY=-1;IGNORECASE=TRUE;DATABASE_TO_UPPER=false
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: false
+  jpa:
+    properties:
+      hibernate:
+        default_schema: blue
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    format_sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+  flyway:
+    url: jdbc:h2:mem:blue
+    schemas: blue
+    user: sa
+    password:
